@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>At-el Installation</title>
+    <style>
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-20px);
+            }
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        @keyframes buttonClick {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(0.9);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between; /* Ensure space between left and right sections */
+            align-items: center;
+            background-color: #004d00;
+            color: white;
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .header-left {
+            display: flex;
+            align-items: center;
+        }
+        .header img {
+            height: 40px; /* Increased logo size */
+        }
+        .header .contact-info {
+            display: flex;
+            align-items: center;
+        }
+        .header .contact-info a {
+            color: white;
+            text-decoration: none;
+            margin-left: 15px;
+            margin-right: 40px; /* Adjust this value to increase padding from the right edge */
+        }
+        .nav {
+            display: flex;
+            align-items: center;
+            margin-left: 20px; /* Set to 0 to remove any existing left margins */
+            position: relative; /* Added for dropdown */
+        }
+        .nav a {
+            color: white;
+            text-align: center;
+            padding: 14px 20px;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+        .nav a:hover {
+            background-color: #002200;
+        }
+        .nav a.book {
+            background-color: #00cc00;
+            border-radius: 20px;
+        }
+        .dropdown {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            background-color: white;
+            display: none;
+            flex-direction: row;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+        }
+        .dropdown a {
+            color: black;
+            padding: 12px 16px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+        }
+        .dropdown a img {
+            margin-right: 10px;
+            height: 40px; /* Adjust as needed */
+        }
+        .dropdown a:hover {
+            background-color: #f1f1f1;
+        }
+        .nav-item:hover .dropdown {
+            display: flex;
+        }
+        .hero {
+            background: url('hero-image.jpg') no-repeat center center/cover;
+            color: white;
+            padding: 150px 20px;
+            text-align: center;
+        }
+        .hero h1 {
+            font-size: 3em;
+            margin: 0 0 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hero p {
+            font-size: 1.2em;
+            margin: 0 0 20px;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hero button {
+            background-color: #00cc00;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .hero button:hover {
+            background-color: #009900;
+        }
+        .scroll-down {
+            text-align: center;
+            padding: 20px;
+            cursor: pointer;
+            animation: bounce 2s infinite;
+        }
+        .scroll-down:hover {
+            color: #009900;
+        }
+        .about-us {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 60px 20px;
+            background-color: #fff;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .about-us img {
+            height: 150px; /* Increased size */
+            margin-right: 20px;
+            margin-bottom: 20px; /* Added margin bottom to reduce space from text */
+        }
+        .about-us-text {
+            max-width: 600px;
+        }
+        .about-us-text h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .about-us-text p {
+            font-size: 1em;
+            line-height: 1.6em;
+            color: #666;
+        }
+        .sections {
+            display: flex;
+            justify-content: space-around;
+            padding: 60px 20px; /* Increased padding */
+            background-color: white;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .section {
+            background-color: #f6fdf6; /* Lighter green */
+            padding: 20px;
+            text-align: center;
+            flex: 1;
+            margin: 0 10px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            transition: box-shadow 0.3s;
+        }
+        .section:hover {
+            box-shadow: 0 6px 12px rgba(0,0,0,0.2);
+        }
+        .section img {
+            height: 60px;
+            margin-bottom: 20px;
+        }
+        .section h2 {
+            font-size: 1.8em;
+            margin: 10px 0;
+        }
+        .section p {
+            font-size: 1em;
+            line-height: 1.6em;
+            color: #666;
+        }
+        .contact-form {
+            background-color: #f4f4f4;
+            padding: 20px 20px; /* Reduced padding */
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+        }
+        .contact-form h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .contact-form form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .contact-form input, .contact-form textarea {
+            width: 60%; /* Reduced width */
+            padding: 10px; /* Reduced padding */
+            margin: 10px 0;
+            border: 1px solid #004d00;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: border-color 0.3s, box-shadow 0.3s;
+        }
+        .contact-form input:focus, .contact-form textarea:focus {
+            border-color: #00cc00;
+            outline: none;
+            box-shadow: 0 0 5px rgba(0,204,0,0.5);
+        }
+        .contact-form button {
+            background-color: #00cc00;
+            border: none;
+            color: white;
+            padding: 15px 30px;
+            cursor: pointer;
+            margin: 10px;
+            border-radius: 5px;
+            font-size: 1em;
+            transition: background-color 0.3s, transform 0.3s;
+        }
+        .contact-form button:hover {
+            background-color: #009900;
+        }
+        .contact-form button:active {
+            animation: buttonClick 0.2s;
+        }
+        .footer {
+            background-color: #003300;
+            color: white;
+            padding: 20px 20px;
+            padding-top: 15px;
+            padding-bottom: 25px;
+            text-align: center;
+            display: flex;
+            justify-content: space-around; /* Ensure equal spacing between items */
+            align-items: flex-start; /* Align items at the start (top) */
+            flex-direction: row; /* Arrange items in a row */
+            animation: fadeIn 2s ease-in-out;
+        }
+        .footer div {
+            flex: 1; /* Allow the items to grow and fill the space equally */
+            margin: 0 10px;
+            align-self: stretch; /* Ensure each item has the same height */
+        }
+        .footer a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin: 5px 0;
+            padding: 2px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <img src="logo.png" alt="At-el Installation Logo">
+            <div class="nav">
+                <div class="nav-item">
+                    <a href="index.html">Forside</a>
+                    <a href="#">Ydelser</a>
+                    <div class="dropdown">
+                        <a href="privat.html"><img src="hus.png" alt="Privat">Privat</a>
+                        <a href="#"><img src="fabrik.png" alt="Erhverv">Erhverv</a>
+                        <a href="#"><img src="etage.png" alt="Boligforeninger">Boligforeninger</a>
+                    </div>
+                </div>
+                <a href="about.html">Om os</a>
+                <a href="#">Jobmuligheder</a>
+                <a href="#" class="book" onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });">Kontakt os</a>
+            </div>
+        </div>
+        <div class="contact-info">
+            <a href="tel:27209651">📞 27 20 96 51</a>
+            <a href="mailto:info@at-el.dk">✉️ info@at-el.dk</a>
+        </div>
+    </div>    
+    <div class="hero">
+        <h1>El-installatør med erfaring og kompetence</h1>
+        <p>Vi rådgiver og vejleder dine el-projekter</p>
+        <button onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });">✉️ Kontakt os</button>
+        <button href="tel:27209651">📞 27 20 96 51</button>
+    </div>
+    <div class="scroll-down" onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });">
+        <p>⬇ Kontakt os her! ⬇</p>
+    </div>
+    <div class="about-us">
+        <img src="logo.png" alt="At-el Installation Logo">
+        <div class="about-us-text">
+            <h2>Om os</h2>
+            <p>At-el Installation har mange års erfaring med el-installationer. Vi er specialister i både privat- og erhvervsinstallationer, og vi har et stærkt fokus på kvalitet og sikkerhed. Vores team består af kompetente fagfolk, der er klar til at hjælpe med alle typer af el-projekter.</p>
+        </div>
+    </div>
+    <div class="sections">
+        <div class="section">
+            <img src="hus.png" alt="Privat">
+            <h2>Privat</h2>
+            <p>Skal du sælge din andelsbolig og have foretaget et el-syn? Eller skal der etableres nyt el i dit køkken? Vi løser mange typer af el-opgaver for private.</p>
+        </div>
+        <div class="section">
+            <img src="fabrik.png" alt="Erhverv">
+            <h2>Erhverv</h2>
+            <p>Skal kontorinstallationerne fornys? Eller skal I have opført ny belysning? Vi udfører mange typer af el-opgaver for erhverv.</p>
+        </div>
+        <div class="section">
+            <img src="etage.png" alt="Boligforeninger">
+            <h2>Boligforeninger</h2>
+            <p>Vi servicerer fast mange boligforeninger. Vi servicerer også gerne jeres. Vi skræddersyr en aftale, som passer til jeres behov.</p>
+        </div>
+    </div>
+    <div id="contact-form" class="contact-form">
+        <h2>Kontakt os</h2>
+        <form onsubmit="sendMail(); return false;">
+            <input type="text" id="name" placeholder="Navn" required>
+            <input type="text" id="address" placeholder="Addresse" required>
+            <input type="tel" id="phone" placeholder="Telefonnummer" required>
+            <input type="email" id="email" placeholder="Email" required>
+            <textarea id="message" rows="4" placeholder="Hvad der ønskes hjælp til" required></textarea>
+            <button type="submit">Send</button>
+        </form>
+    </div>
+    <div class="footer">
+        <div>
+            <h3>AT EL & Enterprise</h3>
+            <a href="https://maps.app.goo.gl/4WwRhw2bXHNPrtDN9">Marielundvej 20, 2730 Herlev</a>
+            <a href="tel:+4527209651">+45 27 20 96 51</a>
+            <a href="mailto:info@at-el.dk">info@at-el.dk</a>
+            <a href="https://datacvr.virk.dk/enhed/virksomhed/4009399659">CVR: 43550659</a>
+        </div>
+        <div>
+            <h3>Genveje</h3>
+            <a href="#">Privat</a>
+            <a href="#">Erhverv</a>
+            <a href="#">Boligforeninger</a>
+            <a href="about.html">Om os</a>
+            <a href="#" onclick="document.getElementById('contact-form').scrollIntoView({ behavior: 'smooth' });">Kontakt os</a>
+        </div>
+        <div>
+            <h3>Følg os!</h3>
+            <a href="https://www.facebook.com/profile.php?id=61560672498004">Facebook</a>
+            <a href="https://www.linkedin.com/company/at-el/">LinkedIn</a>
+            <a href="https://www.instagram.com/atelentreprise/">Instagram</a>
+        </div>
+    </div>
+    <script>
+        function sendMail() {
+            var name = document.getElementById('name').value;
+            var address = document.getElementById('address').value;
+            var phone = document.getElementById('phone').value;
+            var email = document.getElementById('email').value;
+            var message = document.getElementById('message').value;
+            var mailto_link = 'mailto:info@at-el.dk?subject=Kontakt os&body=' +
+                'Navn: ' + name + '%0D%0A' +
+                'Addresse: ' + address + '%0D%0A' +
+                'Telefonnummer: ' + phone + '%0D%0A' +
+                'Email: ' + email + '%0D%0A' +
+                'Hvad der ønskes hjælp til: ' + message;
+            window.location.href = mailto_link;
+        }
+    </script>
+</body>
+</html>
